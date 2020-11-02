@@ -21,7 +21,8 @@ public:
         // Create a map from the tree where the
         // keys are the node values and the values are
         // the number of times that node value appeared
-        getModes(root);
+        if (root != nullptr)
+            getModes(root);
 
         // iterate through the map keys
         for (std::map<int, int>::iterator it = modes.begin(); it != modes.end(); it++)
@@ -53,15 +54,19 @@ public:
     {
         int tmpVal = root->val;
 
-        if (tmpVal)
-        {
-            modes[tmpVal] = modes[tmpVal] + 1;
+        modes[tmpVal] = modes[tmpVal] + 1;
 
-            if (root->right)
-                getModes(root->right);
+        if (root->right != nullptr)
+            getModes(root->right);
 
-            if (root->left)
-                getModes(root->left);
-        }
+        if (root->left != nullptr)
+            getModes(root->left);
     }
 };
+
+/*
+Line 49: Char 20: error: invalid operands to binary expression ('int' and 'nullptr_t')
+        if (tmpVal != nullptr) {
+            ~~~~~~ ^  ~~~~~~~
+1 error generated.
+*/
