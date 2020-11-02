@@ -1,3 +1,6 @@
+// Solution by Rane Wallin for the leetcode challenge "Find modes in binary search tree"
+// https://leetcode.com/problems/find-mode-in-binary-search-tree/
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -12,7 +15,7 @@
 class Solution
 {
 public:
-    std::map<int, int> modes;
+    std::unordered_map<int, int> modes;
     vector<int> findMode(TreeNode *root)
     {
         std::vector<int> highestModes;
@@ -25,7 +28,7 @@ public:
             getModes(root);
 
         // iterate through the map keys
-        for (std::map<int, int>::iterator it = modes.begin(); it != modes.end(); it++)
+        for (std::unordered_map<int, int>::iterator it = modes.begin(); it != modes.end(); it++)
         {
             int key = it->first;
             int val = it->second;
@@ -50,6 +53,7 @@ public:
         return highestModes;
     }
 
+    // Traverse tree and memoize each value in the unordered_map data structure
     void getModes(TreeNode *root)
     {
         int tmpVal = root->val;
@@ -63,10 +67,3 @@ public:
             getModes(root->left);
     }
 };
-
-/*
-Line 49: Char 20: error: invalid operands to binary expression ('int' and 'nullptr_t')
-        if (tmpVal != nullptr) {
-            ~~~~~~ ^  ~~~~~~~
-1 error generated.
-*/
